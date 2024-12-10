@@ -289,6 +289,11 @@ public class IRPF {
 		}
 		return soma;
 	}
+
+	public float getBaseCalculoImposto() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }
