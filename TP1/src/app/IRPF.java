@@ -21,6 +21,8 @@ public class IRPF {
 	
 	private String[] nomesDeducoes;
 	private float[] valoresDeducoes;
+	
+	private float impostoPago;
 
 	public IRPF() {
 		nomeRendimento = new String[0];
@@ -295,5 +297,15 @@ public class IRPF {
 		return 0;
 	}
 	
+	public void setImpostoPago(float imposto) {
+	    this.impostoPago = imposto;
+	}
+
+	public float getAliquotaEfetiva() {
+	    float baseCalculo = getBaseCalculoImposto();
+	    if (baseCalculo == 0) return 0;
+	    return (impostoPago / baseCalculo) * 100;
+	}
+
 	
 }
