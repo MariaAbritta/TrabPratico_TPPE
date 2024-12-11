@@ -293,8 +293,9 @@ public class IRPF {
 	}
 
 	public float getBaseCalculoImposto() {
-		// TODO Auto-generated method stub
-		return 0;
+		float totalRendimentosTributaveis = getTotalRendimentosTributaveis();
+		float totalDeducoes = getDeducao() + getTotalOutrasDeducoes();
+		return totalRendimentosTributaveis - totalDeducoes;
 	}
 	
 	public void setImpostoPago(float imposto) {
