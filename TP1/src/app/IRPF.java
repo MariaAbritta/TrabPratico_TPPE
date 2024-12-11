@@ -33,8 +33,6 @@ public class IRPF {
 	private String[] nomesDeducoes;
 	private float[] valoresDeducoes;
 	
-	private float impostoPago;
-
 	public IRPF() {
 		nomeRendimento = new String[0];
 		rendimentoTributavel = new boolean[0];
@@ -308,10 +306,6 @@ public class IRPF {
 		float totalDeducoes = getDeducao() + getTotalOutrasDeducoes();
 		return totalRendimentosTributaveis - totalDeducoes;
 	}
-	
-	public void setImpostoPago(float imposto) {
-	    this.impostoPago = imposto;
-	}
 
 	public float getImpostoFaixa1() {
 		return 0.0f;
@@ -368,10 +362,8 @@ public class IRPF {
 	}
 
 	public float getAliquotaEfetiva() {
-	    float baseCalculo = getBaseCalculoImposto();
-	    if (baseCalculo == 0) return 0;
-	    return (impostoPago / baseCalculo) * 100;
+	    float totalRendimentosTributaveis = getTotalRendimentosTributaveis();
+	    if (totalRendimentosTributaveis == 0) return 0;
+	    return getImpostoTotal() / getTotalRendimentosTributaveis();
 	}
-
-	
 }
