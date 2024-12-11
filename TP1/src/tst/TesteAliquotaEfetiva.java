@@ -16,12 +16,11 @@ public class TesteAliquotaEfetiva {
 
     @Test
     public void testeAliquotaEfetiva() {
-        irpf.criarRendimento("Salário", IRPF.TRIBUTAVEL, 5000f);
-        irpf.cadastrarContribuicaoPrevidenciaria(1000f);
-        irpf.cadastrarDeducaoIntegral("Funpresp", 500f); 
+        irpf.criarRendimento("Salário", IRPF.TRIBUTAVEL, 10000f);
+        irpf.cadastrarContribuicaoPrevidenciaria(3000.59f);
+        irpf.cadastrarDeducaoIntegral("Funpresp", 189f);
 
-        irpf.setImpostoPago(500f);
-
-        assertEquals(14.29f, irpf.getAliquotaEfetiva(), 0.01f);
+        assertEquals(0.0976, irpf.getAliquotaEfetiva(), 0.0001f);
     }
+
 }
