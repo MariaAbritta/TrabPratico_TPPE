@@ -4,6 +4,17 @@ public class IRPF {
 
 	public static final boolean TRIBUTAVEL = true;
 	public static final boolean NAOTRIBUTAVEL = false;
+
+	public static final float MINIMO_FAIXA_2 = 2259.20f;
+	public static final float MINIMO_FAIXA_3 = 2826.65f;
+	public static final float MINIMO_FAIXA_4 = 3751.05f;
+	public static final float MINIMO_FAIXA_5 = 4664.68f;
+
+	public static final float TAXA_FAIXA_2 = 0.075f;
+	public static final float TAXA_FAIXA_3 = 0.15f;
+	public static final float TAXA_FAIXA_4 = 0.225f;
+	public static final float TAXA_FAIXA_5 = 0.275f;
+
 	private String[] nomeRendimento;
 	private boolean[] rendimentoTributavel;
 	private float[] valorRendimento;
@@ -300,6 +311,60 @@ public class IRPF {
 	
 	public void setImpostoPago(float imposto) {
 	    this.impostoPago = imposto;
+	}
+
+	public float getImpostoFaixa1() {
+		return 0.0f;
+	}
+
+	public float getImpostoFaixa2() {
+		float baseCalculoImposto = getBaseCalculoImposto();
+		if (baseCalculoImposto < MINIMO_FAIXA_2) {
+			return 0.0f;
+		}
+		if (baseCalculoImposto > MINIMO_FAIXA_3) {
+			baseCalculoImposto = MINIMO_FAIXA_3;
+		}
+		return (baseCalculoImposto - MINIMO_FAIXA_2) * TAXA_FAIXA_2;
+	}
+
+	public float getImpostoFaixa3() {
+		float baseCalculoImposto = getBaseCalculoImposto();
+		if (baseCalculoImposto < MINIMO_FAIXA_3) {
+			return 0.0f;
+		}
+		if (baseCalculoImposto > MINIMO_FAIXA_4) {
+			baseCalculoImposto = MINIMO_FAIXA_4;
+		}
+		return (baseCalculoImposto - MINIMO_FAIXA_3) * TAXA_FAIXA_3;
+	}
+
+	public float getImpostoFaixa4() {
+		float baseCalculoImposto = getBaseCalculoImposto();
+		if (baseCalculoImposto < MINIMO_FAIXA_4) {
+			return 0.0f;
+		}
+		if (baseCalculoImposto > MINIMO_FAIXA_5) {
+			baseCalculoImposto = MINIMO_FAIXA_5;
+		}
+		return (baseCalculoImposto - MINIMO_FAIXA_4) * TAXA_FAIXA_4;
+	}
+
+	public float getImpostoFaixa5() {
+		float baseCalculoImposto = getBaseCalculoImposto();
+		if (baseCalculoImposto < MINIMO_FAIXA_5) {
+			return 0.0f;
+		}
+		return (baseCalculoImposto - MINIMO_FAIXA_5) * TAXA_FAIXA_5;
+	}
+
+	public float getImpostoTotal() {
+		float impostoTotal = getImpostoFaixa1();
+		impostoTotal += getImpostoFaixa2();
+		impostoTotal += getImpostoFaixa3();
+		impostoTotal += getImpostoFaixa4();
+		impostoTotal += getImpostoFaixa5();
+	    return impostoTotal;
 	}
 
 	public float getAliquotaEfetiva() {
