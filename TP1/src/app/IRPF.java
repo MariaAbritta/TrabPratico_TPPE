@@ -246,19 +246,36 @@ public class IRPF {
 	 * @param valorDeducao valor da deducao
 	 */
 	public void cadastrarDeducaoIntegral(String nome, float valorDeducao) {
-		String temp[] = new String[nomesDeducoes.length + 1];
-		for (int i=0; i<nomesDeducoes.length; i++) {
-			temp[i] = nomesDeducoes[i]; 
-		}
-		temp[nomesDeducoes.length] = nome;
-		nomesDeducoes = temp;
-		
-		float temp2[] = new float[valoresDeducoes.length + 1];
-		for (int i=0; i<valoresDeducoes.length; i++) {
-			temp2[i] = valoresDeducoes[i]; 
-		}
-		temp2[valoresDeducoes.length] = valorDeducao;
-		valoresDeducoes = temp2;
+	    nomesDeducoes = adicionarElemento(nomesDeducoes, nome);
+	    valoresDeducoes = adicionarElemento(valoresDeducoes, valorDeducao);
+	}
+
+	/**
+	 * Metodo para cadastrar nome da Dedução
+	 * @param array array com o nome das deduções
+	 * @param elemento nome a ser adicionado
+	 */
+	private String[] adicionarElemento(String[] array, String elemento) {
+	    String[] novoArray = new String[array.length + 1];
+	    for (int i = 0; i < array.length; i++) {
+	        novoArray[i] = array[i];
+	    }
+	    novoArray[array.length] = elemento;
+	    return novoArray;
+	}
+
+	/**
+	 * Metodo para cadastrar valores de dedução
+	 * @param array array com os valores das deduções
+	 * @param elemento valor a ser adicionado
+	 */
+	private float[] adicionarElemento(float[] array, float elemento) {
+	    float[] novoArray = new float[array.length + 1];
+	    for (int i = 0; i < array.length; i++) {
+	        novoArray[i] = array[i];
+	    }
+	    novoArray[array.length] = elemento;
+	    return novoArray;
 	}
 
 	
