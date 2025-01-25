@@ -95,7 +95,6 @@ public class IRPF {
 	}
 
 	public void cadastrarDependente(String nome, String parentesco) {
-		// adicionar dependente 
 		String[] temp = new String[nomesDependentes.length + 1];
 		for (int i=0; i<nomesDependentes.length; i++) {
 			temp[i] = nomesDependentes[i];
@@ -169,26 +168,26 @@ public class IRPF {
 	}
 
 	public void cadastrarDeducaoIntegral(String nome, float valorDeducao) {
-	    nomesDeducoes = adicionarElemento(nomesDeducoes, nome);
-	    valoresDeducoes = adicionarElemento(valoresDeducoes, valorDeducao);
+		nomesDeducoes = adicionarElemento(nomesDeducoes, nome);
+		valoresDeducoes = adicionarElemento(valoresDeducoes, valorDeducao);
 	}
 
 	private String[] adicionarElemento(String[] array, String elemento) {
-	    String[] novoArray = new String[array.length + 1];
-	    for (int i = 0; i < array.length; i++) {
-	        novoArray[i] = array[i];
-	    }
-	    novoArray[array.length] = elemento;
-	    return novoArray;
+		String[] novoArray = new String[array.length + 1];
+		for (int i = 0; i < array.length; i++) {
+			novoArray[i] = array[i];
+		}
+		novoArray[array.length] = elemento;
+		return novoArray;
 	}
 
 	private float[] adicionarElemento(float[] array, float elemento) {
-	    float[] novoArray = new float[array.length + 1];
-	    for (int i = 0; i < array.length; i++) {
-	        novoArray[i] = array[i];
-	    }
-	    novoArray[array.length] = elemento;
-	    return novoArray;
+		float[] novoArray = new float[array.length + 1];
+		for (int i = 0; i < array.length; i++) {
+			novoArray[i] = array[i];
+		}
+		novoArray[array.length] = elemento;
+		return novoArray;
 	}
 
 	public String getOutrasDeducoes(String nome) {
@@ -236,15 +235,9 @@ public class IRPF {
 		return (baseCalculoImposto - MINIMO_FAIXA_2) * TAXA_FAIXA_2;
 	}
 
+	// Substituição do método por objeto-método
 	public float getImpostoFaixa3() {
-		float baseCalculoImposto = getBaseCalculoImposto();
-		if (baseCalculoImposto < MINIMO_FAIXA_3) {
-			return 0.0f;
-		}
-		if (baseCalculoImposto > MINIMO_FAIXA_4) {
-			baseCalculoImposto = MINIMO_FAIXA_4;
-		}
-		return (baseCalculoImposto - MINIMO_FAIXA_3) * TAXA_FAIXA_3;
+		return new ImpostoFaixa3(this).calcular();
 	}
 
 	public float getImpostoFaixa4() {
@@ -272,12 +265,12 @@ public class IRPF {
 		impostoTotal += getImpostoFaixa3();
 		impostoTotal += getImpostoFaixa4();
 		impostoTotal += getImpostoFaixa5();
-	    return impostoTotal;
+		return impostoTotal;
 	}
 
 	public float getAliquotaEfetiva() {
-	    float totalRendimentosTributaveis = getTotalRendimentosTributaveis();
-	    if (totalRendimentosTributaveis == 0) return 0;
-	    return getImpostoTotal() / getTotalRendimentosTributaveis();
+		float totalRendimentosTributaveis = getTotalRendimentosTributaveis();
+		if (totalRendimentosTributaveis == 0) return 0;
+		return getImpostoTotal() / getTotalRendimentosTributaveis();
 	}
 }
